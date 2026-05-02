@@ -71,21 +71,34 @@ Valores definidos em `edge/include/config.h` (ajuste se alterar o hardware).
 | **GND** | **GND** | Obrigatório: referência comum com o ESP32. |
 | **VCC do módulo** | Conforme especificação do fabricante (geralmente 5 V ou 3,3 V) | Siga **exclusivamente** o datasheet da sua placa ZMPT101B. |
 
-**Importante:** o lado **rede 230 V AC** deve estar **apenas** no módulo certificado e montado por quem tem competências elétricas. Não ligue AC diretamente ao ESP32. Mau uso pode causar **choque elétrico** ou **incêndio**.
+### Rede AC (110 / 127 / 230 V) → módulo ZMPT101B **somente nos bornes do módulo**
+
+| Fio / condutor | Onde ligar no módulo | Notas |
+|----------------|----------------------|--------|
+| **Fase (L)** | Terminal AC marcado **L** / **Live** / **~** (conforme silk do fabricante) | Use fio com secção e isolação adequadas à corrente do circuito; **nunca** leve este fio ao ESP32. |
+| **Neutro (N)** | Terminal AC marcado **N** / **Neutral** | Mesmo cuidado de isolamento; em diagramas Fritzing, desenhe **dois fios** explícitos da “tomada” até estes bornes. |
+
+**Importante:** o lado **rede AC** (ex.: **~110 V**, **~127 V** ou **~230 V**, conforme a região) deve estar **apenas** no módulo certificado e montado por quem tem competências elétricas. Não ligue AC diretamente ao ESP32. Mau uso pode causar **choque elétrico** ou **incêndio**.
 
 ---
 
 ## Diagrama de ligação
 
-Visão lógica das ligações (GND comum entre DHT11, ESP32 e módulo ZMPT; alimentação USB do ESP32 recomendada via **power bank** para demo estável).
+Visão lógica das ligações (GND comum entre DHT11, ESP32 e módulo ZMPT; **fios da rede monofásica (fase L e neutro N)** só nos terminais AC do módulo ZMPT; alimentação USB do ESP32 recomendada via **power bank** para demo estável).
 
 ```mermaid
 flowchart TB
-    subgraph alim["Alimentação"]
-        PB["Power bank USB 5V"]
+    subgraph alim["Alimentação DC (baixa tensão)"]
+        PB["Power bank USB 5 V"]
+    end
+    subgraph rede_ac["Rede AC — apenas no módulo ZMPT (~110 / ~127 / ~230 V)"]
+        TOM["Tomada / barra AC monofásica"]
+        FL["Fio fase L"]
+        FN["Fio neutro N"]
     end
     subgraph esp["ESP32"]
-        V33["3.3V"]
+        V33["3,3 V"]
+        V5["5 V USB / VIN"]
         G1["GND"]
         IO4["GPIO 4"]
         IO34["GPIO 34 ADC1"]
@@ -97,13 +110,19 @@ flowchart TB
         DD["DATA"]
     end
     subgraph zmpt["Módulo ZMPT101B"]
+        ZL["Terminal AC: L fase"]
+        ZN["Terminal AC: N neutro"]
         ZV["VCC módulo"]
         ZG["GND"]
         ZO["OUT analógico"]
-        ZAC["Entrada AC 230V (apenas no módulo)"]
     end
+    TOM --> FL
+    TOM --> FN
+    FL --> ZL
+    FN --> ZN
     PB --> USB
-    USB --> esp
+    USB --> V5
+    V5 --> ZV
     DV --> V33
     DG --> G1
     DD --> IO4
@@ -115,7 +134,9 @@ Ilustração de referência (PNG gerado para documentação; **não** substitui 
 
 ![Diagrama de ligação HOME_SENSE](docs/wiring-home-sense.png)
 
-> **Fritzing:** não incluímos arquivo `.fz` no repositório. Você pode importar este esquema no [Fritzing](https://fritzing.org/) ou desenhar a partir das tabelas de pinagem e do Mermaid acima.
+*(PNG de referência; fios **L/N** da rede **~110 V / ~127 V / ~220 V** até o ZMPT101B. Para regenerar: `python3 tools/render_wiring_diagram.py` com dependências em `tools/requirements.txt`.)*
+
+> **Fritzing (`.fzz` / breadboard):** não incluímos arquivo no repositório. Ao montar o desenho, inclua **dois fios da rede** (fase **L** e neutro **N**) até os **terminais AC** do módulo ZMPT101B — o ESP32 só liga em **OUT**, **VCC**, **GND** do módulo, nunca em AC. Importe o esquema no [Fritzing](https://fritzing.org/) ou desenhe a partir das tabelas de pinagem e do Mermaid acima.
 
 ---
 
