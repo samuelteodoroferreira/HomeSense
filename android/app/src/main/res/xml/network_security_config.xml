@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Release: sem HTTP em claro -->
+    <base-config cleartextTrafficPermitted="false" />
+    <!-- Apenas em builds debugáveis: emulador (10.0.2.2), localhost ou IP da LAN -->
+    <debug-overrides>
+        <base-config cleartextTrafficPermitted="true" />
+    </debug-overrides>
+</network-security-config>

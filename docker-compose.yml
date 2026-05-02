@@ -1,0 +1,37 @@
+# Mosquitto + PostgreSQL para desenvolvimento local do HOME_SENSE
+# Uso: na raiz do repositório →  docker compose up -d
+
+services:
+  mqtt:
+    image: eclipse-mosquitto:2
+    container_name: homesense-mqtt
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./infra/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - homesense_mqtt_data:/mosquitto/data
+      - homesense_mqtt_log:/mosquitto/log
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: homesense-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: homesense
+      POSTGRES_USER: homesense
+      POSTGRES_PASSWORD: homesense
+    ports:
+      - "5432:5432"
+    volumes:
+      - homesense_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U homesense -d homesense"]
+      interval: 5s
+      timeout: 5s
+      retries: 8
+
+volumes:
+  homesense_mqtt_data:
+  homesense_mqtt_log:
+  homesense_pg_data:

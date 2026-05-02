@@ -1,0 +1,2 @@
+# 1.x: API on_connect(client, userdata, flags, rc). Evita breaking changes do paho 2.
+paho-mqtt>=1.6.1,<2

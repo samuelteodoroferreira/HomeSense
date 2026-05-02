@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: homesense-cloud
+  datasource:
+    url: ${HOMESENSE_DB_URL:jdbc:postgresql://localhost:5432/homesense}
+    username: ${HOMESENSE_DB_USER:homesense}
+    password: ${HOMESENSE_DB_PASS:homesense}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+
+homesense:
+  mqtt:
+    enabled: ${HOMESENSE_MQTT_ENABLED:true}
+    host: ${HOMESENSE_MQTT_HOST:127.0.0.1}
+    port: ${HOMESENSE_MQTT_PORT:1883}
+    client-id: ${HOMESENSE_MQTT_CLIENT_ID:homesense-cloud}
+    subscribe-topic: ${HOMESENSE_MQTT_CLOUD_SUB:homesense/fog/#}
+  energy:
+    zero-max-volts: ${HOMESENSE_ENERGY_ZERO_MAX_VOLTS:10}
+    outage-confirm-seconds: ${HOMESENSE_ENERGY_OUTAGE_CONFIRM_SECONDS:5}
+
+server:
+  port: ${HOMESENSE_CLOUD_PORT:8081}
