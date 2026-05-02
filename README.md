@@ -1,24 +1,35 @@
 # HOME_SENSE
 
+## Capturas de tela
+
+Imagens de **2 de maio de 2026** (~16:55), para referência visual do projeto:
+
+![Captura de tela — HOME_SENSE](docs/Captura%20de%20Tela%202026-05-02%20%C3%A0s%2016.55.00.png)
+
+![Captura de tela — HOME_SENSE](docs/Captura%20de%20Tela%202026-05-02%20%C3%A0s%2016.55.21.png)
+
+---
+
 Sistema IoT para monitoramento de **clima** (temperatura / humidade) e **energia** (tensão AC aproximada), com edge em **ESP32**, gateway **fog** (Kotlin/Ktor), backend **cloud** (Spring Boot + PostgreSQL + MQTT) e **app Android** (Jetpack Compose).
 
 ---
 
 ## Índice
 
-1. [Visão geral da arquitetura](#visão-geral-da-arquitetura)  
-2. [Hardware necessário](#hardware-necessário)  
-3. [Pinagens (ESP32)](#pinagens-esp32)  
-4. [Diagrama de ligação](#diagrama-de-ligação)  
-5. [Montagem e segurança](#montagem-e-segurança)  
-6. [Alimentação recomendada (power bank)](#alimentação-recomendada-power-bank)  
-7. [Software — o que roda onde](#software--o-que-roda-onde)  
-8. [Infraestrutura com Docker](#infraestrutura-com-docker-mosquitto--postgresql)  
-9. [Como utilizar (passo a passo)](#como-utilizar-passo-a-passo)  
-10. [Testar sem ESP32 e sem sensores](#testar-sem-esp32-e-sem-sensores)  
-11. [Variáveis de ambiente úteis](#variáveis-de-ambiente-úteis)  
-12. [Resolução de problemas](#resolução-de-problemas)  
-13. [Idioma (pt-BR)](#idioma-pt-br)
+1. [Capturas de tela](#capturas-de-tela)  
+2. [Visão geral da arquitetura](#visão-geral-da-arquitetura)  
+3. [Hardware necessário](#hardware-necessário)  
+4. [Pinagens (ESP32)](#pinagens-esp32)  
+5. [Diagrama de ligação](#diagrama-de-ligação)  
+6. [Montagem e segurança](#montagem-e-segurança)  
+7. [Alimentação recomendada (power bank)](#alimentação-recomendada-power-bank)  
+8. [Software — o que roda onde](#software--o-que-roda-onde)  
+9. [Infraestrutura com Docker](#infraestrutura-com-docker-mosquitto--postgresql)  
+10. [Como utilizar (passo a passo)](#como-utilizar-passo-a-passo)  
+11. [Testar sem ESP32 e sem sensores](#testar-sem-esp32-e-sem-sensores)  
+12. [Variáveis de ambiente úteis](#variáveis-de-ambiente-úteis)  
+13. [Resolução de problemas](#resolução-de-problemas)  
+14. [Idioma (pt-BR)](#idioma-pt-br)
 
 ---
 
