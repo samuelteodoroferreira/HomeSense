@@ -25,6 +25,10 @@ Thumbs.db
 .pio/
 **/.pio/
 
+# Python
+__pycache__/
+*.py[cod]
+
 # Env secrets
 .env
 **/application-local.yml
