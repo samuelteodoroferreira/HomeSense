@@ -1,4 +1,4 @@
 # 1.x: API on_connect(client, userdata, flags, rc). Evita breaking changes do paho 2.
 paho-mqtt>=1.6.1,<2
-# Opcional: regenerar docs/wiring-home-sense.png — python3 tools/render_wiring_diagram.py
+# Opcional: regenerar docs/wiring-home-sense-schematic.png — python3 tools/render_wiring_diagram.py
 Pillow>=10.0.0

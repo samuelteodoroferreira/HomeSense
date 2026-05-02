@@ -130,13 +130,33 @@ flowchart TB
     ZO --> IO34
 ```
 
-Ilustração de referência (PNG gerado para documentação; **não** substitui o datasheet do seu módulo ZMPT nem o pinout da sua placa ESP32):
+Ilustrações de referência (**não** substituem o datasheet do seu módulo ZMPT nem o pinout da sua placa ESP32):
 
-![Diagrama de ligação HOME_SENSE](docs/wiring-home-sense.png)
+**1 — Montagem (Fritzing ou foto)** — ficheiro `docs/wiring-home-sense.png` (substitua pelo seu export ou fotografia com legendas):
 
-*(PNG de referência; fios **L/N** da rede **~110 V / ~127 V / ~220 V** até o ZMPT101B. Para regenerar: `python3 tools/render_wiring_diagram.py` com dependências em `tools/requirements.txt`.)*
+![Montagem HOME_SENSE — breadboard ou foto](docs/wiring-home-sense.png)
 
-> **Fritzing (`.fzz` / breadboard):** não incluímos arquivo no repositório. Ao montar o desenho, inclua **dois fios da rede** (fase **L** e neutro **N**) até os **terminais AC** do módulo ZMPT101B — o ESP32 só liga em **OUT**, **VCC**, **GND** do módulo, nunca em AC. Importe o esquema no [Fritzing](https://fritzing.org/) ou desenhe a partir das tabelas de pinagem e do Mermaid acima.
+**2 — Esquema ilustrado (gerado por código)** — ficheiro `docs/wiring-home-sense-schematic.png` (atualizado com `python3 tools/render_wiring_diagram.py`):
+
+![Esquema ilustrado HOME_SENSE — L/N e ligações](docs/wiring-home-sense-schematic.png)
+
+### Fidelidade tipo breadboard ou foto (caminho recomendado)
+
+Para documentação com **aspecto de montagem real** (componentes reconhecíveis, cores de jumpers, breadboard), use um destes fluxos e **versiona o PNG** (e, se quiser, o projeto Fritzing) no repositório.
+
+**A — Fritzing**  
+1. Monte a vista **breadboard** no [Fritzing](https://fritzing.org/): ESP32, DHT11, módulo ZMPT101B, jumpers, e **dois fios da rede** (fase **L** e neutro **N**) só nos **bornes AC** do módulo — o ESP32 liga apenas a **OUT**, **VCC** e **GND** do módulo, **nunca** a AC.  
+2. `Arquivo → Exportar → como imagem` (PNG), preferencialmente **só a vista breadboard** ou com legenda no próprio Fritzing.  
+3. Substitua `docs/wiring-home-sense.png` por esse export (mantém o link da **figura 1** deste README) **ou** guarde outro nome (ex.: `docs/wiring-montagem-fritzing.png`) e altere o `![...](docs/...)` da figura 1.  
+4. *(Opcional)* Inclua o `.fzz` em `docs/` para outros poderem editar o mesmo desenho (ficheiros Fritzing costumam ser grandes; vale a pena para trabalhos de grupo).
+
+**B — Foto real + legendas**  
+1. Fotografe a montagem com boa luz e foco.  
+2. Num editor de imagem (ou no relatório do curso), acrescente **setas e rótulos** (GPIO 4, 3,3 V, GND, GPIO 34, VCC do ZMPT, **L** e **N** na rede).  
+3. Exporte para `docs/wiring-home-sense.png` ou outro ficheiro referenciado no README.
+
+**Esquema ilustrado (opcional, figura 2)**  
+O ficheiro `docs/wiring-home-sense-schematic.png` é gerado por `python3 tools/render_wiring_diagram.py` (dependência **Pillow** em `tools/requirements.txt`). Serve como **esquema rápido** em CI ou documentação; **não** substitui a fidelidade visual de **Fritzing** nem de **foto**. O script **não** altera `docs/wiring-home-sense.png`.
 
 ---
 
